@@ -26,15 +26,12 @@
                         <!-- Tombol Tambah Data Petani -->
                         <div class="w-full px-6 font-inter">
                             <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
-                                <button onclick="document.getElementById('modalTambah').showModal()" id="btn" class="w-full md:w-auto text-sm bg-green-500 px-4 py-2 text-white rounded-3xl font-semibold hover:bg-green-800">
+                                <a class="w-full md:w-auto text-sm bg-green-500 px-4 py-2 text-white rounded-3xl font-semibold hover:bg-green-800" href="{{ url('/petani/create') }}">
                                     <i class='bx bx-plus-medical'></i>
                                     Tambah Data Petani
-                                </button>
+                                </a>
                             </div>
                         </div>
-
-                        <!-- Tambah Data Petani -->
-                        @include('pages.petani.create_petani')
                     </div>
 
                     <!-- Tabel -->
@@ -68,156 +65,49 @@
                                 <tbody>
 
                                     <!-- satu -->
+                                    @foreach($data as $item)
                                     <tr class="border-b border-opacity-20 border-gray-700 bg-white">
                                         <td class="p-3">
-                                            <p>1.</p>
+                                            <p>{{ "$loop->iteration"."." }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>Bambang</p>
+                                            <p>{{ $item->nama }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>Jl. Gajah Mada</p>
+                                            <p>{{ $item->alamat }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>081247214241</p>
+                                            <p>{{ $item->no_hp }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>10 Hektar</p>
+                                            <p>{{ $item->luas_lahan }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>Varietas A</p>
+                                            <p>{{ $item->varietas_sawit }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>Pupuk A</p>
+                                            <p>{{ $item->pupuk }}</p>
                                         </td>
                                         <td class="p-3">
-                                            <p>> 10 bulan</p>
+                                            <p>{{ $item->tahun_sawit }}</p>
                                         </td>
                                         <td class="p-3 text-right">
                                             <div class="flex item-center justify-center">
-                                                <div onclick="document.getElementById('modalUbah').showModal()" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer">
-                                                    <i class='bx bxs-pencil' title="Ubah"></i>
-                                                </div>
-                                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer" data-modal-toggle="authentication-modal">
-                                                    <i class='bx bxs-trash' title="Hapus"></i>
-                                                </div>
+                                                <form action="{{ url("/petani/$item->id") }}" method="POST">
+                                                    @csrf @method('DELETE')
+                                                    <a class="mr-3 bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline" href="{{ url("/petani/$item->id/edit") }}">Edit</a>
+                                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline mt-2">Hapus</button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
-
-                                    <!-- Ubah Data Petani -->
-                                    @include('pages.petani.edit_petani')
-
-                                    <!-- Hapus Data Petani -->
-                                    @include('pages.petani.delete_petani')
-
-                                    <!-- dua -->
-                                    <tr class="border-b border-opacity-20 border-gray-700 bg-white">
-                                        <td class="p-3">
-                                            <p>2.</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Udin</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Jl. Ahmad Yani</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>081247214241</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>20 Hektar</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Varietas B</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Pupuk B</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>
-                                                < 10 bulan</p>
-                                        </td>
-                                        <td class="p-3 text-right">
-                                            <div class="flex item-center justify-center">
-                                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                    <i class='bx bxs-pencil' title="Ubah"></i>
-                                                </div>
-                                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                    <i class='bx bxs-trash' title="Hapus"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <!-- tiga -->
-                                    <tr class="border-b border-opacity-20 border-gray-700 bg-white">
-                                        <td class="p-3">
-                                            <p>3.</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Adi</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Jl. Tanjung Pura</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>081247214241</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>30 Hektar</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Varietas C</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>Pupuk C</p>
-                                        </td>
-                                        <td class="p-3">
-                                            <p>> 10 bulan</p>
-                                        </td>
-                                        <td class="p-3 text-right">
-                                            <div class="flex item-center justify-center">
-                                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                    <i class='bx bxs-pencil' title="Ubah"></i>
-                                                </div>
-                                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                    <i class='bx bxs-trash' title="Hapus"></i>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </main>
-
-            <!-- script animasi tombol tambah data dan ubah data -->
-            <style>
-                dialog::backdrop {
-                    background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(54, 54, 54, 0.5));
-                    backdrop-filter: blur(3px);
-                }
-
-
-                @keyframes appear {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-3rem);
-                    }
-
-                    to {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                }
-            </style>
-
-            <!-- script animasi tombol hapus data -->
-            <script src="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.bundle.js"></script>
 
         </div>
     </div>

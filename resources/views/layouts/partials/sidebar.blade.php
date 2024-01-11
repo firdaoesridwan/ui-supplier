@@ -16,7 +16,7 @@
             <span class="mx-3">Beranda</span>
         </a>
 
-        <a class="flex items-center px-6 py-2 mt-2 text-gray-500 hover:bg-green-400 hover:text-white {{ Request::is('petani') ? 'bg-green-400 text-white' : '' }}" href="{{ url('/petani') }}">
+        <a class="flex items-center px-6 py-2 mt-2 text-gray-500 hover:bg-green-400 hover:text-white {{ Request::is(['petani', 'petani/create', 'petani/{id}/edit']) ? 'bg-green-400 text-white' : '' }}" href="{{ url('/petani') }}">
             <i class='bx bxs-group'></i>
             <span class="mx-3">Petani</span>
         </a>

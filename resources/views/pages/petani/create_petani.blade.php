@@ -1,65 +1,80 @@
-<dialog id="modalTambah" class="h-auto w-11/12 md:w-1/2 p-5  bg-white rounded-md font-inter">
-    <div class="flex flex-col w-full h-auto ">
+@extends('layouts.app')
 
-        <!-- Header -->
-        <div class="flex w-full h-auto justify-start items-center">
-            <div class="flex h-auto py-3 text-xl font-semibold">
-                Tambah Data Petani
-            </div>
+@section('title', 'SIMAMPU - Petani')
+
+@section('content')
+<div>
+    <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+        <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
+
+        <!-- sidebar -->
+        @include('layouts.partials.sidebar')
+
+        <div class="flex flex-col flex-1 overflow-hidden">
+
+            <!-- navbar -->
+            @include('layouts.partials.navbar')
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                <div class="container px-6 py-8 mx-auto">
+                    <h3 class="text-3xl font-semibold text-gray-700 font-inter">Petani</h3>
+
+                    <div class="mt-4"></div>
+
+                    <div class="p-8 rounded-md border border-gray-200 bg-white font-inter">
+                        <h1 class="font-semibold text-2xl">Tambah Data Petani</h1>
+
+                        <form action="{{ url('/petani') }}" method="POST">
+                            @csrf 
+                            <div class="mt-8 grid lg:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Nama Petani</label>
+                                    <input type="text" name="nama" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan nama petani disini..." />
+                                </div>
+
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Jenis Varietas</label>
+                                    <input type="text" name="varietas_sawit" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan jenis varietas disini..." />
+                                </div>
+
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Nomor Telepon</label>
+                                    <input type="text" name="no_hp" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan nomor telepon disini..." />
+                                </div>
+
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Jenis Pupuk</label>
+                                    <input type="text" name="pupuk" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan jenis pupuk disini..." />
+                                </div>
+
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Alamat</label>
+                                    <input type="text" name="alamat" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan alamat disini..." />
+                                </div>
+
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Tahun Sawit</label>
+                                    <input type="text" name="tahun_sawit" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan tahun sawit disini..." />
+                                </div>
+
+                                <div>
+                                    <label for="" class="text-gray-700 block mb-1 font-semibold">Luas Lahan</label>
+                                    <input type="text" name="luas_lahan" class="bg-gray-100 border border-gray-200 rounded py-2 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full" placeholder="Masukkan luas lahan disini..." />
+                                </div>
+
+                            </div>
+
+                            <div class="space-x-4 mt-8">
+                                <button type="submit" class="py-2 px-4 rounded disabled:opacity-50 text-white bg-green-500 hover:bg-green-800 focus:bg-gray-600">Tambah</button>
+
+                                <!-- Secondary -->
+                                <a class="py-3 px-4 rounded disabled:opacity-50  text-white bg-red-500 hover:bg-red-800 focus:bg-gray-600" href="{{ url('/petani') }}">Batal</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
         </div>
-
-        <!-- Modal Content-->
-        <form>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-                <div>
-                    <label class="text-black" for="username">Nama Petani</label>
-                    <input id="username" type="text" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                </div>
-
-                <div>
-                    <label class="text-black" for="passwordConfirmation">Jenis Varietas</label>
-                    <select class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                        <option>Varietas A</option>
-                        <option>Varietas B</option>
-                        <option>Varietas C</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="text-black" for="emailAddress">Nomor Telepon</label>
-                    <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                </div>
-
-                <div>
-                    <label class="text-black" for="emailAddress">Jenis Pupuk</label>
-                    <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                </div>
-
-                <div>
-                    <label class="text-black" for="emailAddress">Alamat</label>
-                    <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                </div>
-
-                <div>
-                    <label class="text-black" for="emailAddress">Tahun Sawit</label>
-                    <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                </div>
-
-                <div>
-                    <label class="text-black" for="emailAddress">Luas Lahan</label>
-                    <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-400 rounded-md focus:border-blue-500 focus:outline-none focus:ring">
-                </div>
-            </div>
-
-            <div class="flex mt-6 justify-end">
-                <div class="">
-                    <button onclick="document.getElementById('modalTambah').close();" class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-red-500 rounded-md hover:bg-red-800 focus:outline-none focus:bg-gray-600">Batal</button>
-                </div>
-
-                <div class="ml-4">
-                    <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-green-500 rounded-md hover:bg-green-800 focus:outline-none focus:bg-gray-600">Tambah</button>
-                </div>
-            </div>
-        </form>
     </div>
-</dialog>
+</div>
+@endsection
